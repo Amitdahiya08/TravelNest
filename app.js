@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const mongoUrl = "mongodb://127.0.0.1:27017/travelNest";
 const Listing = require("./models/listing.js");
 const path = require("path");
+const methodOverride = require("method-override");
 
 main()
     .then(() => {
@@ -22,6 +23,7 @@ app.listen(8080, () => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
     res.send("Server is working ");
@@ -60,4 +62,22 @@ app.get("/listings/:id", async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/show.ejs", { listing });
+});
+// edit route
+app.get("/listings/:id/edit", async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", { listing });
+});
+// update route
+app.put("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    res.redirect(`/listings/${id}`);
+});
+// delete route
+app.delete("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings");
 });
