@@ -20,7 +20,6 @@ const listingSchema = new Schema({
         url: {
             type: String,
             default: defaultLink, 
-            required: true
         }
     },
     price: {
