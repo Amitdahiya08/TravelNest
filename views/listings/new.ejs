@@ -1,21 +1,43 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <br><br>
     <h3>Create A New Listing</h3>
     <form action="/listings" method="post">
-        <input name="listing[title]" type="text" placeholder="enter your title">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input name="listing[title]" type="text" placeholder="enter your title" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image-name" class="form-label">Image Name</label>
+            <input type="text" name="listing[image][filename]" class="form-control" placeholder="Enter image name">
+        </div>
+        <div class="mb-3">
+            <label for="image-url" class="form-label">Image Link</label>
+            <input type="text" name="listing[image][url]" class="form-control" placeholder="Enter image URL/Link">
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="listing[price]" class="form-control" placeholder="Enter price">
+            </div>
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" class="form-control" placeholder="Enter country">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="listing[location]" class="form-control" placeholder="Enter location">
+        </div>
+        <button class="mt-3 btn-dark add-btn">Add</button>
         <br><br>
-        <textarea name="listing[description]" placeholder="enter your description"></textarea>
-        <br><br>
-        <input type="text" name="listing[image][filename]" placeholder="Enter image name">
-        <br><br>
-        <input type="text" name="listing[image][url]" placeholder="Enter image URL/Link">
-        <br><br>
-        <input type="number" name="listing[price]" placeholder="Enter price">
-        <br><br>
-        <input type="text" name="listing[country]" placeholder="Enter country">
-        <br><br>
-        <input type="text" name="listing[location]" placeholder="Enter location">
-        <br><br>
-        <button>Submit</button>
     </form>
+</div>
+</div>
 </body>
