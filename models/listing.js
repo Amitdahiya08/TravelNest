@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const defaultLink = "https://images.unsplash.com/photo-1610513320995-1ad4bbf25e55?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const defaultLink = "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60";
 
 const listingSchema = new Schema({
     title: {
@@ -15,11 +15,13 @@ const listingSchema = new Schema({
     image: {
         filename: {
             type: String,
-            default: "listingImage"
+            default: "listingImage",
+            set: (v) => v === "" ? "listingImage": v,
         },
         url: {
             type: String,
             default: defaultLink, 
+            set: (v) => v === "" ? defaultLink: v,
         }
     },
     price: {
@@ -29,7 +31,7 @@ const listingSchema = new Schema({
     location: {
         type: String,
         required: true
-    },
+    }, 
     country: {
         type: String,
         required: true
