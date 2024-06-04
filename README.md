@@ -41,7 +41,7 @@ Usage instructions will be provided once the project reaches a stable state.
 We welcome contributions once the project is completed! Please check back later for our contributing guidelines.
 
 ## Roadmap
-- [x] Develop middlewares for error handling
+- ✅ Develop middlewares for error handling
 - [ ] Implement user authentication
 - [ ] Add web cookies parser and signed cookies
 - [ ] Implement sessions in the project
