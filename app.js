@@ -9,7 +9,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
-const {listingSchema}=require("./schema.js");
+const { listingSchema , reviewSchema }=require("./schema.js");
+const Review = require("./models/review.js");
 main()
     .then(() => {
         console.log("Database is connected");
@@ -43,6 +44,17 @@ const validateListing = (req,res,next)=>{
         next();
     }
 }
+
+const validateReview = (req,res,next)=>{
+    let {error} = reviewSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }
+    else{
+        next();
+    }
+}
 // index route
 app.get("/listings", wrapAsync(async (req, res) => {
     const AllListings = await Listing.find({});
@@ -64,7 +76,7 @@ app.post("/listings", validateListing, wrapAsync(async (req, res,next) => {
 // show route
 app.get("/listings/:id", wrapAsync(async (req, res,next) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs", { listing });
 }));
 
@@ -91,6 +103,30 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
 }));
+
+// reviews - Post route
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async(req,res)=>{
+     let listing = await Listing.findById(req.params.id);
+     let newReview = new Review(req.body.review);
+
+     listing.reviews.push(newReview);
+     await newReview.save();
+     await listing.save();
+
+     console.log("review added");
+     res.redirect(`/listings/${listing._id}`);
+}));   
+
+// delete review route
+
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async(req,res)=>{
+    let {id, reviewId} = req.params;
+    // here pull operator removes the reviewId from review array of our listing
+    await Listing.findByIdAndUpdate(id,{$pull: {review:reviewId}});
+    // now deleting review from reviews collection
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+}))
 
 // custom Error Handler
 app.all("*",(req,res,next)=>{
