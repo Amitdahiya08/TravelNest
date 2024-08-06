@@ -42,9 +42,8 @@ We welcome contributions once the project is completed! Please check back later 
 
 ## Roadmap
 - ✅ Develop middlewares for error handling
-- [ ] Implement user authentication
-- [ ] Add web cookies parser and signed cookies
-- [ ] Implement sessions in the project
+- ✅ Implement user authentication
+- ✅ Implement sessions in the project
 - ✅ Implement flash messages in the project
 - [ ] Set up MVC architecture for reviews and users
 - [ ] Integrate geocoding for map markers
