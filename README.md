@@ -45,7 +45,7 @@ We welcome contributions once the project is completed! Please check back later 
 - ✅ Implement user authentication
 - ✅ Implement sessions in the project
 - ✅ Implement flash messages in the project
-- [ ] Set up MVC architecture for reviews and users
+- ✅ Set up MVC architecture for reviews and users
 - [ ] Integrate geocoding for map markers
 - [ ] Set up MongoDB session store
 
