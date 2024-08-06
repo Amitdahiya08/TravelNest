@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config()
+}
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -39,7 +42,7 @@ const sessionOptions = {
     resave: false, // Don't save session if unmodified
     saveUninitialized: true, // Save uninitialized sessions
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 3, // Cookie expiration time in milliseconds (1 day)
+        maxAge: 1000 * 60 * 60 * 24 * 3, // Cookie expiration time in milliseconds (3 day)
         httpOnly: true
     }
 };
