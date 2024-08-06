@@ -12,7 +12,7 @@ module.exports.renderNewForm=(req, res) => {
 
 module.exports.createListing=async (req, res,next) => {
     let url = req.file.path;
-    let filename= req.file.filename;
+    let filename= req.file.filename; 
     let newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image={url,filename};
@@ -46,11 +46,16 @@ module.exports.editListing=async (req, res) => {
 };
 
 module.exports.updateListing=async (req, res) => {
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send valid data for listing")
-    }
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+
+    if(typeof req.file !== "undefined"){
+        let url = req.file.path;
+        let filename= req.file.filename;
+        listing.image={url,filename};
+        await listing.save();
+    }
+    req.flash("success","Listing Updated!")
     res.redirect(`/listings/${id}`);
 };
 
