@@ -43,18 +43,18 @@ app.use(express.static(path.join(__dirname,"/public")));
 const store = MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
-        secret:process.env.SECRET,
+        secret:"alfkdlagllafdll",
     },
     touchAfter: 24*3600,
 });
 
-store.on("error",()=>{
+store.on("error",(err)=>{
     console.log("ERROR in mongo session store ",err);
 });
 
 const sessionOptions = {
     store,
-    secret: process.env.SECRET, // Secret used to sign the session ID cookie
+    secret: "alfkdlagllafdll", // Secret used to sign the session ID cookie
     resave: false, // Don't save session if unmodified
     saveUninitialized: true, // Save uninitialized sessions
     cookie: {
