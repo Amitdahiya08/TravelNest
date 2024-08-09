@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const initData= require("./data.js");
 
-const mongoUrl="mongodb://127.0.0.1:27017/travelNest";
+const mongoUrl="mongodb+srv://dahiyaamit444:Amit7404@cluster0.8bp4a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const Listing = require("../models/listing.js");
 
@@ -16,7 +16,7 @@ async function main() {
 
 const initDB = async()=> {
     await Listing.deleteMany({});
-    initData.data = initData.data.map((obj)=> ({...obj, owner:"669c1c3afeefce9f22b9a881"}));
+    initData.data = initData.data.map((obj)=> ({...obj, owner:"66b6733d54fad392082075fc"}));
     await Listing.insertMany(initData.data);
     console.log("data was saved");
 }
