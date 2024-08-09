@@ -1,23 +1,4 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<style>
-    #filters{
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .filter{
-        text-align: center;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        opacity: 0.7;
-    }
-    .filter:hover{
-        opacity: 1;
-        cursor: pointer;
-    }
-    .filter p{
-        font-size: 0.8rem;
-    }
-</style>
 <div class="filters" id="filters">
     <div class="filter">
         <a href="/listings/trending"><div><i class="fa-solid fa-fire"></i></div></a>
@@ -59,6 +40,13 @@
         <a href="/listings/beach"><div><i class="fa-solid fa-umbrella-beach"></i></div></a>
         <p>Beaches</p>
     </div>
+
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display with taxes</label>
+          </div>
+    </div>
 </div>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <% for(let listing of AllListings){ %>
@@ -67,12 +55,28 @@
                 <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
                 <div class="card-img-overlay"></div>
                 <div class="card-body">
-                <p class="card-text">
-                    <b><%= listing.title  %> </b> <br>
-                    &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-                </p>
+                    <p class="card-text">
+                        <b><%= listing.title %></b> <br>
+                        &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                        <i class="tax-info">&nbsp; + &nbsp; &#8377; <%= (listing.price * 0.18).toLocaleString("en-IN") %> tax</i>
+                    </p>                    
                 </div>
             </div>
         </a>
         <% } %>
 </div>
+
+<script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for (info of taxInfo){
+            if(info.style.display!="inline"){
+                info.style.display="inline";
+            }
+            else {
+                info.style.display="none";
+            }
+        }
+    })
+</script>
