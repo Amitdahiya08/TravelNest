@@ -8,13 +8,16 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
-const mongoUrl = "mongodb://127.0.0.1:27017/travelNest";
+// const mongoUrl = "mongodb://127.0.0.1:27017/travelNest";
+const dbUrl = process.env.ATLASDB_URL;
+
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -26,7 +29,7 @@ main()
     })
     .catch(err => console.log(err));
 async function main() {
-    await mongoose.connect(mongoUrl);
+    await mongoose.connect(dbUrl);
 };
 
 app.set("view engine", "ejs");
@@ -37,8 +40,21 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public"))); 
 
+const store = MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter: 24*3600,
+});
+
+store.on("error",()=>{
+    console.log("ERROR in mongo session store ",err);
+});
+
 const sessionOptions = {
-    secret: "mySuperSecretCode", // Secret used to sign the session ID cookie
+    store,
+    secret: process.env.SECRET, // Secret used to sign the session ID cookie
     resave: false, // Don't save session if unmodified
     saveUninitialized: true, // Save uninitialized sessions
     cookie: {
@@ -49,7 +65,7 @@ const sessionOptions = {
 // app.get("/", (req, res) => {
 //     res.send("Server is working ");
 // });
- 
+
 app.use(session(sessionOptions));
 app.use(flash());
 
