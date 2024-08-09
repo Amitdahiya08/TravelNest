@@ -46,7 +46,7 @@ We welcome contributions once the project is completed! Please check back later 
 - ✅ Implement sessions in the project
 - ✅ Implement flash messages in the project
 - ✅ Set up MVC architecture for reviews and users
-- [ ] Integrate geocoding for map markers
+- ✅ Filter Category Icons 
 - [ ] Set up MongoDB session store
 
 ## License
