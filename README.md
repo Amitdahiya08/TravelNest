@@ -36,10 +36,10 @@ TravelNest has been being developed. All Basic and important features are comple
 
 
 ## Contributing
-We welcome contributions some of the issues are given below !.
-1.You can contribute to improve frontend 
-2.Search button need backend functionality
-3.New Listing Form need a space to add category for new listing
+    We welcome contributions some of the issues are given below !.
+1. You can contribute to improve frontend 
+2. Search button need backend functionality
+3. New Listing Form need a space to add category for new listing
 
 ## Roadmap
 - ✅ Develop middlewares for error handling
