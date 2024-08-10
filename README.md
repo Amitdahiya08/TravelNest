@@ -36,7 +36,8 @@ TravelNest has been being developed. All Basic and important features are comple
 
 
 ## Contributing
-    We welcome contributions some of the issues are given below !.
+We welcome contributions You can Fork the repo and start contributing to it .
+some of the issues are given below !.
 1. You can contribute to improve frontend 
 2. Search button need backend functionality
 3. New Listing Form need a space to add category for new listing
