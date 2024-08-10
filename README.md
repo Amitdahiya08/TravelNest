@@ -1,12 +1,12 @@
 # TravelNest
+Live : https://travelnest-r9pa.onrender.com/listings
+Note: live link can be slow for first time load as it is deployed using free hosting services.
 
 ## Description
-TravelNest is an Hotel Booking website that allows users to book and list rental properties. It is being developed using MongoDB, Node.js, Express.js, and JavaScript. The project is currently in the early stages of development.
+TravelNest is an Hotel Booking website that allows users to book and list rental properties. It is being developed using MongoDB, Node.js, Express.js, and JavaScript.
 
 ## Current Status
-🚧 **Under Development** 🚧
-
-TravelNest is actively being developed. Many features are incomplete, and the API may change frequently.
+TravelNest has been being developed. All Basic and important features are complete.
 
 ## Installation
 ### Prerequisites
@@ -34,11 +34,12 @@ TravelNest is actively being developed. Many features are incomplete, and the AP
         MONGODB_URI=your_mongodb_uri
         ```
 
-## Usage
-Usage instructions will be provided once the project reaches a stable state.
 
 ## Contributing
-We welcome contributions once the project is completed! Please check back later for our contributing guidelines.
+We welcome contributions some of the issues are given below !.
+1.You can contribute to improve frontend 
+2.Search button need backend functionality
+3.New Listing Form need a space to add category for new listing
 
 ## Roadmap
 - ✅ Develop middlewares for error handling
@@ -47,10 +48,10 @@ We welcome contributions once the project is completed! Please check back later 
 - ✅ Implement flash messages in the project
 - ✅ Set up MVC architecture for reviews and users
 - ✅ Filter Category Icons 
-- [ ] Set up MongoDB session store
+- ✅ Set up MongoDB session store
 
 ## License
-This project will be licensed under the MIT License. License details will be added soon.
+This project is licensed under the MIT License. License details will be added soon.
 
 ## Contact
 For any questions or suggestions, please reach out to [dahiyaamit004@gmail.com](mailto:dahiyaamit004@gmail.com).
